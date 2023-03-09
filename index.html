@@ -27,33 +27,41 @@
 <meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="pansansui" type="application/atom+xml">
 </head>
 
-<body>
-  <main class="content">
-    <section class="jumbotron">
+  <body>
+    <div>
+      <iframe class="musicPlayer" frameborder="no" border="0" marginwidth="0" marginheight="0" width=110 height=100
+        src="//music.163.com/outchain/player?type=0&id=8222072696&auto=1&height=430"></iframe>
+    </div>
+    <main class="content">
+      <section class="jumbotron">
   <div class="video">
     
-    <div class="video-frame">
-      <img src="/images/ocean/overlay-hero.png" alt="Decorative image frame">
-    </div>
-    
-    <div class="video-media">
-      <video playsinline="" autoplay="" loop="" muted="" data-autoplay="" poster="/images/ocean/ocean.png"
-        x5-video-player-type="h5">
-        <source src="/images/ocean/ocean.mp4" type="video/mp4">
-        <source src="/images/ocean/ocean.ogv" type="video/ogg">
-        <source src="/images/ocean/ocean.webm" type="video/webm">
-        <p>Your user agent does not support the HTML5 Video element.</p>
-      </video>
-      <div class="video-overlay"></div>
-    </div>
-    <div class="video-inner text-center text-white">
-      <h1><a href="/">pansansui</a></h1>
-      <p></p>
-      <div><img src="/images/hexo-inverted.svg" class="brand" alt="pansansui"></div>
-    </div>
-    <div class="video-learn-more">
-      <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
-    </div>
+      <div class="video-frame">
+        <img src="/images/ocean/overlay-hero.png" alt="Decorative image frame">
+      </div>
+      
+        <div class="video-media">
+          <video playsinline="" autoplay="" loop="" muted="" data-autoplay="" poster="/images/ocean/ocean.png"
+            x5-video-player-type="h5">
+            <source src="/images/ocean/ocean.mp4" type="video/mp4">
+            <source src="/images/ocean/ocean.ogv" type="video/ogg">
+            <source src="/images/ocean/ocean.webm" type="video/webm">
+            <p>Your user agent does not support the HTML5 Video element.</p>
+          </video>
+          <div class="video-overlay"></div>
+        </div>
+        <div class="video-inner text-center text-white">
+          <h1><a href="/">
+              pansansui
+            </a></h1>
+          <p>
+            
+          </p>
+          <div><img src="/images/hexo-inverted.svg" class="brand" alt="pansansui"></div>
+        </div>
+        <div class="video-learn-more">
+          <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
+        </div>
   </div>
 </section>
 <div id="landingpage">
@@ -63,6 +71,246 @@
       <h1 class="page-type-title"></h1>
       
         
+          <article id="post-pansansuiBlog" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/09/pansansuiBlog/">pansansuiBlog</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2023/03/09/pansansuiBlog/" class="article-date">
+  <time datetime="2023-03-09T07:24:40.000Z" itemprop="datePublished">2023-03-09</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <h1 id="本博客的框架和解构（Hexo框架，Ocean主题）"><a href="#本博客的框架和解构（Hexo框架，Ocean主题）" class="headerlink" title="本博客的框架和解构（Hexo框架，Ocean主题）"></a>本博客的框架和解构（Hexo框架，Ocean主题）</h1><p>完全自己一个人摸索的，理解不一定正确</p>
+<h2 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h2><blockquote>
+<p>node_modules—————————-npm下载的各种依赖插件，hexo服务器，各类hexo的插件<br>public———————————-hexo给你的工程编译后的工程结构，实际上你开发的项目部署时的结构<br>scaffolds—————————-模板，hexo new 可以按照里面的模板来生产Markdown</p>
+<blockquote>
+<p>draft —————————-blog的草稿文件模板<br>post—————————-发布的blog模板<br>page—————————-页面模板!!!区分blog和页面，</p>
+</blockquote>
+<p>source—————————-对应scaffolds模板创建出来的文件，写博文主要在这个文件下面编辑</p>
+<blockquote>
+<p>_draft<br>_posts<br>about<br>gallery<br>link<br>video</p>
+</blockquote>
+<p>themes—————————-主题</p>
+<blockquote>
+<p>landscape———–landscape据了解是设计hexo主题的一个框架没用ocean主题应该把landscape文件名改成ocean，再根据结构开发<br>ocean</p>
+<blockquote>
+<p>languages<br>layout</p>
+<blockquote>
+<p>layout.ejs—————————- 每个页面的入口文件<br>_config.yml —————————-ocean主题的配置文件</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>_config.landscape.yml<br>_config.yml hexo的配置文件</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pansansui.github.io/2023/03/09/pansansuiBlog/" data-id="clf0zontw00014k90ec9m9595" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+            
+          <article id="post-mysql" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/09/mysql/">mysql</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2023/03/09/mysql/" class="article-date">
+  <time datetime="2023-03-09T03:47:57.000Z" itemprop="datePublished">2023-03-09</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pansansui.github.io/2023/03/09/mysql/" data-id="clf0kjn8u000080908vb9abdx" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+            
+          <article id="post-数据结构" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2023/03/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="article-date">
+  <time datetime="2023-03-08T08:13:44.000Z" itemprop="datePublished">2023-03-08</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>#每天一道算法题</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pansansui.github.io/2023/03/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-id="clezm1hnb00003s907jnv5vju" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+            
+          <article id="post-gitssh" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/07/gitssh/">git and ssh</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2023/03/07/gitssh/" class="article-date">
+  <time datetime="2023-03-07T10:23:41.000Z" itemprop="datePublished">2023-03-07</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <h1 id="配置用户名"><a href="#配置用户名" class="headerlink" title="配置用户名"></a>配置用户名</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;用户名&quot;</span> </span><br></pre></td></tr></table></figure>
+<h1 id="配置邮箱"><a href="#配置邮箱" class="headerlink" title="配置邮箱"></a>配置邮箱</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email` <span class="string">&quot;邮箱地址&quot;</span></span><br></pre></td></tr></table></figure>
+<h1 id="git生成公钥"><a href="#git生成公钥" class="headerlink" title="git生成公钥"></a>git生成公钥</h1><blockquote>
+<p>  会生成在当前目录，git bash到用户的.ssh文件夹，可命名文件名，可设置打开文件的密码.默认电脑一个公钥私钥，一个公钥只能被使用一次，建议公钥绑定github账号而非github具体的仓库，部署多个<a target="_blank" rel="noopener" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys">点击这里</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&#x27;邮箱地址&#x27;</span></span><br></pre></td></tr></table></figure>
+<h1 id="查看git的用户名和邮箱"><a href="#查看git的用户名和邮箱" class="headerlink" title="查看git的用户名和邮箱"></a>查看git的用户名和邮箱</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global --list</span><br></pre></td></tr></table></figure>
+<h1 id="查看git的公钥"><a href="#查看git的公钥" class="headerlink" title="查看git的公钥"></a>查看git的公钥</h1><p>存储就在用户目录下的.ssh文件夹里</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="创建git仓库"><a href="#创建git仓库" class="headerlink" title="创建git仓库"></a>创建git仓库</h1><p>1.先在账户上创建repository。保证用户有权限，SSH或者http登录，推荐SSH绑定账户信息，http登录仓库，方便权限管理</p>
+<p>2.a 没有.git文件的，先在本地工程一级目录下初始化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# HexoBogForPanpan&quot;</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin git@github.com:pansansui/HexoBogForPanpan.git //这是在你电脑上生成了一个origin的远程仓库，连接地址是后面的，常用命令有git remote //列出远程仓库名</span><br><span class="line">git remote show [远程仓库名] //该仓库链接的详细信息</span><br><span class="line">git remote rename old-name new-name //换名</span><br><span class="line">git push -u origin main //发布到远程仓库</span><br></pre></td></tr></table></figure>
+<p>2.b 有.git文件的:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:pansansui/HexoBogForPanpan.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
+
+<h1 id="git-常用命令集"><a href="#git-常用命令集" class="headerlink" title="git 常用命令集"></a>git 常用命令集</h1><p>git 常用操作练习<a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">点击这里</a>，该网站常用命令show solution，reset，levels<br>删除当前项目的git关联<br><code>find . -name &quot;.git&quot; | xargs rm -rf</code><br>初始化<br><code>git init</code><br>查看追踪文件状态<br><code>git status</code><br>取消文件追踪<br><code>git reset HEAD [文件路径]</code><br>添加文件追踪<br><code>git add [文件]</code><br>提交<br> <code>git commit -m [本次更新的消息提示]</code><br>创建切换分支<br><code>git branch bugFix;git checkout bugFix</code><br>或者<br><code>git checkout -b bugFix</code><br>合并当前分支与目标<br><code>git merge [目标分支]</code><br><img src=/images/merge.png width="30%" alt="未找到merge流程图片" ><br><code>git rebase [目标分支]</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pansansui.github.io/2023/03/07/gitssh/" data-id="clezczno30000yw905rbmf49t" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+            
           <article id="post-hello-world" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -99,7 +347,7 @@
     
     
     <a class="article-gallery-img" href="/2021/06/22/hello-world/" rel="gallery_cley33rfe00050090bink05wp">
-      <img src="/java.jpg" itemprop="image">
+      <img src="/images/hexo.svg" itemprop="image">
     </a>
     
     
@@ -145,7 +393,7 @@
 </section>
 </div>
 
-    <footer class="footer">
+        <footer class="footer">
   <div class="outer">
     <div class="float-right">
       <ul class="list-inline">
@@ -168,13 +416,14 @@
                 target="_blank">panwei</a>
           </li>
           <li>
-            theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+            theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean
+            </a></li>
     </ul>
   </div>
 </footer>
-  </main>
-  <aside class="sidebar">
-    <button class="navbar-toggle"></button>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
 <nav class="navbar">
   
   <div class="logo">
@@ -237,8 +486,8 @@
   <div id="local-search-result" class="local-search-result"></div>
 </div>
 </div>
-  </aside>
-  
+    </aside>
+    
 <script src="/js/jquery-2.0.3.min.js"></script>
 
 
@@ -266,6 +515,6 @@
 
 <script src="/js/ocean.js"></script>
 
-</body>
+  </body>
 
-</html>
+  </html>
