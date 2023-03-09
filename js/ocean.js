@@ -222,7 +222,7 @@
     );
   } else {
     var issmall = true;
-    $('.musicPlayer').click(function () {
+    $('.musicPlayer').on('click', function () {
       if (issmall) {
         $('.musicPlayer').stop(true, true).animate({
           width: 330,
