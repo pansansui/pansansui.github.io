@@ -236,7 +236,7 @@
           opacity: 0.4
         }, 'slow');
       };
-      issmall = !isMobile;
+      issmall = !issmall;
     }
     );
   }
