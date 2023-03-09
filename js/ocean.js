@@ -223,6 +223,7 @@
   } else {
     var issmall = true;
     $('.musicPlayer').on('click', function () {
+      console.log("绑定click");
       if (issmall) {
         $('.musicPlayer').stop(true, true).animate({
           width: 330,
@@ -240,11 +241,10 @@
     }
     );
   }
-
-  // $('.musicPlayer').css("zIndex", "9");
-  // $('.musicPlayer').css("position", "fixed");
-  // $('.musicPlayer').css("opacity", "0.4");
-  //style="z-index: 9;position: fixed;opacity: 0.4;"
+  $('.musicPlayer').css("zIndex", "9");
+  $('.musicPlayer').css("position", "fixed");
+  $('.musicPlayer').css("opacity", "0.4");
+  // style="z-index: 9;position: fixed;opacity: 0.4;"
 })(jQuery);
 
 
