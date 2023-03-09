@@ -205,7 +205,7 @@
   });
 
   // 给网易云播放器绑定事件,pc绑定hover，手机绑定click
-  if (!isMobile.any()) {
+  if (isMobile.any() == null) {
     $('.musicPlayer').stop(true, true).hover(function () {
       $('.musicPlayer').animate({
         width: 330,
@@ -222,6 +222,7 @@
     );
   } else {
     var issmall = true;
+    $('.musicPlayer').css("width", "300");
     $('.musicPlayer').on('click', function () {
       console.log("绑定click");
       if (issmall) {
@@ -241,7 +242,7 @@
     }
     );
   }
-  $('.musicPlayer').css("zIndex", "9");
+  $('.musicPlayer').css("zIndex", "3");
   $('.musicPlayer').css("position", "fixed");
   $('.musicPlayer').css("opacity", "0.4");
   // style="z-index: 9;position: fixed;opacity: 0.4;"
