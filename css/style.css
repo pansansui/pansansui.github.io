@@ -1025,112 +1025,6 @@ img {
   content: "—";
   padding: 0 0.5rem;
 }
-.jumbotron {
-  padding: 0;
-  margin-bottom: 3rem;
-  text-align: center;
-}
-.content,
-.sidebar {
-  transition: all 0.3s ease-in-out;
-}
-.content {
-  position: relative;
-  z-index: 1;
-  margin-right: 0;
-}
-.content.on {
-  transform: translateX(-10rem);
-}
-.content .copy-btn {
-  position: absolute;
-  font-size: 12px;
-  color: rgba(140,140,140,0.8);
-  transition: color;
-  cursor: pointer;
-}
-.content .copy-btn:hover {
-  color: #8c8c8c;
-}
-.sidebar {
-  position: fixed;
-  z-index: 9;
-  top: 0;
-  right: -10rem;
-  bottom: 0;
-  width: 10rem;
-  background-color: #f4f4f4;
-}
-.sidebar.on {
-  right: 0;
-}
-.navbar-toggle {
-  position: absolute;
-  top: 1.5rem;
-  right: 11.5rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  -webkit-border-radius: 0.4rem;
-  -moz-border-radius: 0.4rem;
-  border-radius: 0.4rem;
-  background-color: rgba(30,62,63,0.25);
-  color: #fff;
-}
-.navbar-toggle::before {
-  content: '\f105';
-  font-family: feathericon;
-  font-size: larger;
-}
-.wrap,
-.outer {
-  width: 100%;
-  padding-right: 1.5rem;
-  padding-left: 1.5rem;
-  margin: auto;
-}
-.wrap::before,
-.outer::before,
-.wrap::after,
-.outer::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.local-search {
-  width: 100%;
-}
-.tocbot {
-  display: none;
-}
-@media (min-width: 768px) {
-  .jumbotron {
-    margin-bottom: 6rem;
-  }
-  .content {
-    margin-right: 10rem;
-  }
-  .sidebar {
-    right: 0;
-    background-color: #fff;
-  }
-  .navbar-toggle {
-    display: none;
-  }
-  .wrap,
-  .outer {
-    width: 70rem;
-    padding-right: 0;
-    padding-left: 0;
-  }
-  .local-search {
-    width: 70rem;
-  }
-}
-@media (min-width: 1200px) {
-  .tocbot {
-    display: block;
-  }
-}
 .list-unstyled,
 .list-inline {
   list-style: none;
@@ -2319,6 +2213,112 @@ pre .javascript .function {
     transform: translateY(-100%);
   }
 }
+.jumbotron {
+  padding: 0;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+.content,
+.sidebar {
+  transition: all 0.3s ease-in-out;
+}
+.content {
+  position: relative;
+  z-index: 1;
+  margin-right: 0;
+}
+.content.on {
+  transform: translateX(-10rem);
+}
+.content .copy-btn {
+  position: absolute;
+  font-size: 12px;
+  color: rgba(140,140,140,0.8);
+  transition: color;
+  cursor: pointer;
+}
+.content .copy-btn:hover {
+  color: #8c8c8c;
+}
+.sidebar {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  right: 10rem;
+  bottom: 0;
+  width: 10rem;
+  background-color: #f4f4f4;
+}
+.sidebar.on {
+  right: 0;
+}
+.navbar-toggle {
+  position: absolute;
+  top: 1.5rem;
+  right: 11.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  -webkit-border-radius: 0.4rem;
+  -moz-border-radius: 0.4rem;
+  border-radius: 0.4rem;
+  background-color: rgba(30,62,63,0.25);
+  color: #fff;
+}
+.navbar-toggle::before {
+  content: '\f105';
+  font-family: feathericon;
+  font-size: larger;
+}
+.wrap,
+.outer {
+  width: 100%;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  margin: auto;
+}
+.wrap::before,
+.outer::before,
+.wrap::after,
+.outer::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.local-search {
+  width: 100%;
+}
+.tocbot {
+  display: none;
+}
+@media (min-width: 768px) {
+  .jumbotron {
+    margin-bottom: 6rem;
+  }
+  .content {
+    margin-right: 10rem;
+  }
+  .sidebar {
+    right: 0;
+    background-color: #f4f4f4;
+  }
+  .navbar-toggle {
+    display: none;
+  }
+  .wrap,
+  .outer {
+    width: 70rem;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .local-search {
+    width: 70rem;
+  }
+}
+@media (min-width: 1200px) {
+  .tocbot {
+    display: block;
+  }
+}
 .navbar {
   position: relative;
   padding-top: 3rem;
@@ -2356,8 +2356,8 @@ pre .javascript .function {
 .navbar .nav.nav-main .nav-item:nth-child(3) .nav-item-link::before {
   content: '\f1a9';
 }
-.navbar .nav.nav-main .nav-item:nth-child(4) .nav-item-link::before {
-  content: '\f137';
+.navbar .nav.nav-main .nav-item:nth-child(6) .nav-item-link::before {
+  content: '\f15e';
 }
 .navbar .nav.nav-main .nav-item:nth-child(4) .nav-item-link::before {
   content: '\f174';
