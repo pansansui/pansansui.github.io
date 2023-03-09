@@ -241,7 +241,7 @@
     );
   };
 
-  $('.sidebar').width('-10rem');
+  $('.sidebar').css("right", "-10rem");
   $('.musicPlayer').css("zIndex", "9");
   $('.musicPlayer').css("position", "fixed");
   $('.musicPlayer').css("opacity", "0.4");
