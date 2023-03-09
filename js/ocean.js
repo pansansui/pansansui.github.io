@@ -205,21 +205,24 @@
   });
 
   // 给网易云播放器绑定事件
-
-  $('.musicPlayer').hover(function () {
+  $('.musicPlayer').stop(true, true).hover(function () {
     $('.musicPlayer').animate({
       width: 330,
       height: 400,
       opacity: 1
-    }, 'slow')
+    }, 'slow');
   }, function () {
-    $('.musicPlayer').animate({
+    $('.musicPlayer').stop(true, true).animate({
       width: 110,
       height: 100,
       opacity: 0.4
-    }, 'slow')
-  })
-
+    }, 'slow');
+  }
+  );
+  $('.musicPlayer').css("zIndex", "9");
+  $('.musicPlayer').css("position", "fixed");
+  $('.musicPlayer').css("opacity", "0.4");
+  //style="z-index: 9;position: fixed;opacity: 0.4;"
 })(jQuery);
 
 
