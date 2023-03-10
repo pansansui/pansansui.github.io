@@ -2244,7 +2244,7 @@ pre .javascript .function {
   position: fixed;
   z-index: 9;
   top: 0;
-  right: 10rem;
+  right: -10rem;
   bottom: 0;
   width: 10rem;
   background-color: #f4f4f4;
@@ -2290,16 +2290,20 @@ pre .javascript .function {
 .tocbot {
   display: none;
 }
+.musicPlayer {
+  position: fixed;
+  z-index: 9;
+  opacity: 0.4;
+}
 @media (min-width: 768px) {
+  .sidebar {
+    right: 0;
+  }
   .jumbotron {
     margin-bottom: 6rem;
   }
   .content {
     margin-right: 10rem;
-  }
-  .sidebar {
-    right: 0;
-    background-color: #f4f4f4;
   }
   .navbar-toggle {
     display: none;

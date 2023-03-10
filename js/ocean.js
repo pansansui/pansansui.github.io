@@ -240,11 +240,6 @@
     }
     );
   };
-
-  $('.sidebar').css("right", "-10rem");
-  $('.musicPlayer').css("zIndex", "9");
-  $('.musicPlayer').css("position", "fixed");
-  $('.musicPlayer').css("opacity", "0.4");
   //style="z-index: 9;position: fixed;opacity: 0.4;"
 })(jQuery);
 
