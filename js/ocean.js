@@ -203,7 +203,7 @@
     $content.removeClass('on');
     $sidebar.removeClass('on');
   });
-
+  // 实现网易云播放器在移动端的不透明化和顶部连接
   // 给网易云播放器绑定事件,pc绑定hover，手机绑定click
   if (!isMobile.any()) {
     $('.musicPlayer').stop(true, true).hover(function () {
@@ -221,25 +221,23 @@
     }
     );
   } else {
-    var issmall = true;
-    $('.musicPlayer').click(function () {
-      if (issmall) {
-        $('.musicPlayer').stop(true, true).animate({
-          width: 330,
-          height: 400,
-          opacity: 1
-        }, 'slow');
-      } else {
+    $('.musicMobileCover').click(function () {
+      if ($('.musicPlayer').width() > 110) {
         $('.musicPlayer').stop(true, false).animate({
           width: 110,
           height: 100,
           opacity: 0.4
         }, 'slow');
-      };
-      issmall = !isMobile;
-    }
-    );
-  };
+      } else {
+        $('.musicPlayer').animate({
+          width: 330,
+          height: 400,
+          opacity: 1
+        }, 'slow');
+      }
+    })
+  }
+
   //style="z-index: 9;position: fixed;opacity: 0.4;"
 })(jQuery);
 

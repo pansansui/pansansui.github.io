@@ -6,7 +6,7 @@
   <link href="https://pansansui.github.io/atom.xml" rel="self"/>
   
   <link href="https://pansansui.github.io/"/>
-  <updated>2023-03-09T13:20:46.246Z</updated>
+  <updated>2023-03-13T15:55:49.204Z</updated>
   <id>https://pansansui.github.io/</id>
   
   <author>
@@ -17,20 +17,88 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>html_CSS</title>
+    <link href="https://pansansui.github.io/2023/03/13/html-CSS/"/>
+    <id>https://pansansui.github.io/2023/03/13/html-CSS/</id>
+    <published>2023-03-13T09:22:53.000Z</published>
+    <updated>2023-03-13T15:55:49.204Z</updated>
+    
+    
+    <summary type="html">div内文字：
+a. 字母时，空格区别一个单词，换行时不会切割单词。
+b. 汉字时，自动换行。
+
+把div当作模板时，可以遮住iframe，遮不住select。可以使用iframe可以遮盖select，一般使用iframe和div结合的办法遮盖select（div所以要比iframe的z索引高）并创建内容，其实iframe会自动隐藏select，也可以自己只使用div和js隐藏select。如本博客主页所遇到的,下面的div用来在移动端时，遮住音乐播放器，和主页select视频，放弃hover事件模拟播放器iframe的点击事件。
+
+1
+2
+3
+4
+
+
+&lt;div class=&quot;musicMob</summary>
+    
+    
+    
+    
+    <category term="html" scheme="https://pansansui.github.io/tags/html/"/>
+    
+    <category term="css" scheme="https://pansansui.github.io/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>lanIP</title>
+    <link href="https://pansansui.github.io/2023/03/13/lanIP/"/>
+    <id>https://pansansui.github.io/2023/03/13/lanIP/</id>
+    <published>2023-03-13T04:56:32.000Z</published>
+    <updated>2023-03-13T16:25:31.059Z</updated>
+    
+    
+    <summary type="html">路由寻址的摸索
+个人理解，ip对应网卡，实际是多个虚拟网卡。mac对应主机，实际是对应端口号。
+自己下午测了一下路由的各种情况，画了个表，大概知道路由器会有路由表，寻址时先广播找MAC。
+
+4.在同一个wifi下（应该是同频率下），192.168.8.5（包装自己的Mac）在广播寻址192.168.8.2，在相同频段内连接的所有的网卡均能收到8.5寻找8.2信息，只要自身是8.2就可以回复并发送自己的Mac，不是8.2的不回复（存在多个冲突，推测先到先得），8.5在根据目标8.2的mac发送报文。（本次的路由器ip为192.169.0.1/24，与子网不同，推测路由器并不会在路由表中维护8.5</summary>
+    
+    
+    
+    
+    <category term="ip" scheme="https://pansansui.github.io/tags/ip/"/>
+    
+    <category term="bug" scheme="https://pansansui.github.io/tags/bug/"/>
+    
+    <category term="局域网" scheme="https://pansansui.github.io/tags/%E5%B1%80%E5%9F%9F%E7%BD%91/"/>
+    
+    <category term="DHCP" scheme="https://pansansui.github.io/tags/DHCP/"/>
+    
+    <category term="路由器" scheme="https://pansansui.github.io/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+    <category term="路由表" scheme="https://pansansui.github.io/tags/%E8%B7%AF%E7%94%B1%E8%A1%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>pansansuiBlog</title>
     <link href="https://pansansui.github.io/2023/03/09/pansansuiBlog/"/>
     <id>https://pansansui.github.io/2023/03/09/pansansuiBlog/</id>
     <published>2023-03-09T07:24:40.000Z</published>
-    <updated>2023-03-09T13:20:46.246Z</updated>
+    <updated>2023-03-13T15:21:27.819Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;本博客的框架和解构（Hexo框架，Ocean主题）&quot;&gt;&lt;a href=&quot;#本博客的框架和解构（Hexo框架，Ocean主题）&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">本博客的框架和解构（Hexo框架，Ocean主题）
+完全自己一个人摸索的，理解不一定正确
+
+工程结构
+node_modules—————————-npm下载的各种依赖插件，hexo服务器，各类hexo的插件
+public———————————-hexo给你的工程编译后的工程结构，实际上你开发的项目部署时的结构
+scaffolds—————————-模板，hexo new 可以按照里面的模板来生产Markdown
+
+draft —————————-blog的草稿文件模板he
+post—————————-发布的blog模板
+page—————————-页面模板!!!区分blog和页面，
+
+sour</summary>
     
     
     
@@ -48,7 +116,7 @@
     <link href="https://pansansui.github.io/2023/03/09/mysql/"/>
     <id>https://pansansui.github.io/2023/03/09/mysql/</id>
     <published>2023-03-09T03:47:57.000Z</published>
-    <updated>2023-03-09T13:23:08.814Z</updated>
+    <updated>2023-03-10T05:58:54.495Z</updated>
     
     
     
@@ -63,16 +131,15 @@
     <link href="https://pansansui.github.io/2023/03/08/hexoOceanSkill/"/>
     <id>https://pansansui.github.io/2023/03/08/hexoOceanSkill/</id>
     <published>2023-03-08T10:33:59.000Z</published>
-    <updated>2023-03-10T02:31:43.384Z</updated>
+    <updated>2023-03-13T15:43:52.751Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;ocean 主题的feathericon的代号映射位置在themes\ocean\source\css_feathericon.styl下&lt;br&gt;ocean</summary>
-        
-      
+    <summary type="html">ocean 主题的feathericon的代号映射位置在themes\ocean\source\css_feathericon.styl下
+ocean 主题的菜单更改图标的文件在themes\ocean\source\css_partial\navbar.styl中
+
+遇到的问题:
+制作谷歌播放器动画的时候，声明在themes\ocean\source\css_partial\layout.styl 的属性绑定不了上iframe，最后在themes\ocean\source\js\ocean.js中用jQuery绑定的，原因初步推测是要等iframe渲染好才可以绑定style属性。
+—发现部署</summary>
     
     
     
@@ -88,17 +155,80 @@
     <link href="https://pansansui.github.io/2023/03/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     <id>https://pansansui.github.io/2023/03/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</id>
     <published>2023-03-08T08:13:44.000Z</published>
-    <updated>2023-03-10T04:49:48.322Z</updated>
+    <updated>2023-03-13T15:20:49.147Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;每天一道算法题&quot;&gt;&lt;a href=&quot;#每天一道算法题&quot; class=&quot;headerlink&quot; title=&quot;每天一道算法题&quot;&gt;&lt;/a&gt;每天一道算法题&lt;/h1&gt;&lt;p&gt;date: 2023-3-10 8:00&lt;/p&gt;
-&lt;h2 id=&quot;题目：&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">每天一道算法题
+date: 2023-3-10 8:00
+
+题目：
+字符串转换整数,请你来实现一个 myAtoi(string s) 函数，使其能将字符串转换成一个 32 位有符号整数（类似 C/C++ 中的 atoi 函数）
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65</summary>
     
     
     
@@ -116,16 +246,40 @@
     <link href="https://pansansui.github.io/2023/03/07/gitssh/"/>
     <id>https://pansansui.github.io/2023/03/07/gitssh/</id>
     <published>2023-03-07T10:23:41.000Z</published>
-    <updated>2023-03-09T13:19:48.202Z</updated>
+    <updated>2023-03-13T16:07:29.915Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;配置用户名&quot;&gt;&lt;a href=&quot;#配置用户名&quot; class=&quot;headerlink&quot; title=&quot;配置用户名&quot;&gt;&lt;/a&gt;配置用户名&lt;/h1&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
-        
-      
+    <summary type="html">配置用户名
+1
+
+
+git config --global user.name &quot;用户名&quot; 
+
+
+配置邮箱
+1
+
+
+git config --global user.email` &quot;邮箱地址&quot;
+
+
+git生成公钥
+ 会生成在当前目录，git bash到用户的.ssh文件夹，可命名文件名，可设置打开文件的密码.默认电脑一个公钥私钥，一个公钥只能被使用一次，建议公钥绑定github账号而非github具体的仓库，部署多个点击这里
+
+1
+
+
+ssh-keygen -t rsa -C &#39;邮箱地址&#39;
+
+
+查看git的用户名和邮箱
+1
+
+
+git config --global --list
+
+
+查看gi</summary>
     
     
     
@@ -143,16 +297,22 @@
     <link href="https://pansansui.github.io/2021/06/22/hello-world/"/>
     <id>https://pansansui.github.io/2021/06/22/hello-world/</id>
     <published>2021-06-22T09:47:20.539Z</published>
-    <updated>2023-03-09T04:12:21.896Z</updated>
+    <updated>2023-03-13T16:07:42.503Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Welcome ! This is my first blog for review my Java knowledge . Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If</summary>
-        
-      
+    <summary type="html">Welcome ! This is my first blog for review my Java knowledge . Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+
+Quick Start
+Create a new post
+1
+
+
+$ hexo new &quot;My New Post&quot;
+
+
+More info: Writing
+
+Run ser</summary>
     
     
     

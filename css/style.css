@@ -2295,6 +2295,14 @@ pre .javascript .function {
   z-index: 9;
   opacity: 0.4;
 }
+.musicMobileCover {
+  position: fixed;
+  z-index: 10;
+  opacity: 0;
+  width: 100px;
+  height: 100px;
+  background-color: #fff;
+}
 @media (min-width: 768px) {
   .sidebar {
     right: 0;
@@ -2317,10 +2325,16 @@ pre .javascript .function {
   .local-search {
     width: 70rem;
   }
+  .musicMobileCover {
+    display: none;
+  }
 }
 @media (min-width: 1200px) {
   .tocbot {
     display: block;
+  }
+  .musicMobileCover {
+    display: none;
   }
 }
 .navbar {
