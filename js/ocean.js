@@ -203,7 +203,7 @@
     $content.removeClass('on');
     $sidebar.removeClass('on');
   });
-  // 实现网易云播放器在移动端的不透明化和顶部连接
+
   // 给网易云播放器绑定事件,pc绑定hover，手机绑定click
   if (!isMobile.any()) {
     $('.musicPlayer').stop(true, true).hover(function () {

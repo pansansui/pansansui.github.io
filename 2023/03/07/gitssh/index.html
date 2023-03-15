@@ -77,11 +77,8 @@
       
       <h1 id="配置用户名"><a href="#配置用户名" class="headerlink" title="配置用户名"></a>配置用户名</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;用户名&quot;</span> </span><br></pre></td></tr></table></figure>
 <h1 id="配置邮箱"><a href="#配置邮箱" class="headerlink" title="配置邮箱"></a>配置邮箱</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email` <span class="string">&quot;邮箱地址&quot;</span></span><br></pre></td></tr></table></figure>
-<h1 id="git生成公钥"><a href="#git生成公钥" class="headerlink" title="git生成公钥"></a>git生成公钥</h1><blockquote>
-<p>  会生成在当前目录，git bash到用户的.ssh文件夹，可命名文件名，可设置打开文件的密码.默认电脑一个公钥私钥，一个公钥只能被使用一次，建议公钥绑定github账号而非github具体的仓库，部署多个<a target="_blank" rel="noopener" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys">点击这里</a></p>
-</blockquote>
+<h1 id="git生成公钥"><a href="#git生成公钥" class="headerlink" title="git生成公钥"></a>git生成公钥</h1><p>会生成在当前目录，git bash到用户的.ssh文件夹，可命名文件名，可设置打开文件的密码.默认电脑一个公钥私钥，一个公钥只能被使用一次，建议公钥绑定github账号而非github具体的仓库，部署多个<a target="_blank" rel="noopener" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys">点击这里</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&#x27;邮箱地址&#x27;</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
 <h1 id="查看git的用户名和邮箱"><a href="#查看git的用户名和邮箱" class="headerlink" title="查看git的用户名和邮箱"></a>查看git的用户名和邮箱</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global --list</span><br></pre></td></tr></table></figure>
 <h1 id="查看git的公钥"><a href="#查看git的公钥" class="headerlink" title="查看git的公钥"></a>查看git的公钥</h1><p>存储就在用户目录下的.ssh文件夹里</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
@@ -93,11 +90,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:pansansui/HexoBogForPanpan.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
 
 <h1 id="git-常用命令集"><a href="#git-常用命令集" class="headerlink" title="git 常用命令集"></a>git 常用命令集</h1><p>git 常用操作练习<a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">点击这里</a>，该网站常用命令show solution，reset，levels<br>删除当前项目的git关联<br><code>find . -name &quot;.git&quot; | xargs rm -rf</code><br>初始化<br><code>git init</code><br>查看追踪文件状态<br><code>git status</code><br>取消文件追踪<br><code>git reset HEAD [文件路径]</code><br>添加文件追踪<br><code>git add [文件]</code><br>提交<br> <code>git commit -m [本次更新的消息提示]</code><br>创建切换分支<br><code>git branch bugFix;git checkout bugFix</code><br>或者<br><code>git checkout -b bugFix</code><br>合并当前分支与目标<br><code>git merge [目标分支]</code><br><img src=/images/merge.png width="30%" alt="未找到merge流程图片" ><br><code>git rebase [目标分支]</code></p>
+<p>对最近一次提交的信息修改<br><code>git commit --amend</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/07/gitssh/" data-id="clf71drn00005nc907qqo3vq9" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/07/gitssh/" data-id="clf9ycp660005s89012af2qf7" class="article-share-link">
         分享
       </a>
       
