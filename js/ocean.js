@@ -141,8 +141,16 @@
   $(document).ready(function ($) {
     $('.anchor').click(function (event) {
       event.preventDefault();
-      $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 'smooth');
+      if ($('#landingpage').attr("hidden")) {
+        $('#landingpage').removeAttr("hidden");
+        $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 'smooth');
+      } else {
+        $('html, body').animate({ scrollTop: 0 }, 800, () => {
+          $('#landingpage').attr("hidden", "hidden");
+        });
+       } 
     });
+    
   });
 
   // To top
@@ -237,8 +245,16 @@
       }
     })
   }
-
   //style="z-index: 9;position: fixed;opacity: 0.4;"
+  if ($('.bvideo')) {
+    $('.bvideo a').each((index, element) => {
+      const url = location.href + $(element).attr("class");
+      $(element).click(() => {
+        window.location = url;
+      })
+    })
+   }
+
 })(jQuery);
 
 
