@@ -75,6 +75,158 @@
       <h1 class="page-type-title"></h1>
       
         
+          <article id="post-IO流" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/18/IO%E6%B5%81/">IO流</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2023/03/18/IO%E6%B5%81/" class="article-date">
+  <time datetime="2023-03-18T14:21:15.000Z" itemprop="datePublished">2023-03-18</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>个人思考：<br>目前我知道的是软件只能操作自己的内存空间不能操作其他的内存空间（因为不知道内存地址）?操作系统，和java程序这些都属于一个软件。那么io操作就应该是由硬件配套的程序管理的（驱动程序吗？）。当操作系统需要读取文件时，不应该是操作系统去写入而是操作系统向驱动程序发起读取请求，然后把自己的内存空间暴露给驱动系统，驱动系统再向其中写入文件?而java的老版本是：先驱动把文件写进操作系统的内存空间，操作系统再写入java暴露给操作系统的java内存空间，两次copy效率低，现在是建立映射，而操作系统暴露给驱动的内存空间实际上是java暴露给操作系统的内存空间吗？我的理解对吗，所以内存映射并不是java层实现的对吗，而是操作系统层实现的吗？而且如果是硬盘上的拷贝，各个软件传递的也是最终文件放置空间的地址值而非真正的拷贝? 求指导，我是一个非科班的初学者，希望得到的帮助 ，最好能详细讲解从硬件数据到java内存的过程包括各种协议的名称，作用，具体的实现细节可以不用告知，我想知道一个正确的框架?还有个问题，如果是我说的这样，为什么java不去直接找驱动，是不知道驱动的路径吗，只有安装了驱动的操作系统才有交互的可能？而安装的驱动实际上有点像嵌入式开发的软体？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pansansui.github.io/2023/03/18/IO%E6%B5%81/" data-id="clfe48ffr000bw09018jp1z8m" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+            
+          <article id="post-maven" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/18/maven/">maven</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2023/03/18/maven/" class="article-date">
+  <time datetime="2023-03-18T13:46:58.000Z" itemprop="datePublished">2023-03-18</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>sb-MAVEN<br>一点依赖传递都没解决，存粹的一个jar包管理工具，单纯只想引进个日志slf4j就搞我半天草</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.7.30&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.18.12&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt; &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt; &lt;artifactId&gt;logback-classic&lt;/artifactId&gt; &lt;version&gt;1.2.11&lt;/version&gt; &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pansansui.github.io/2023/03/18/maven/" data-id="clfe48fft000ew090712hdxri" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+            
+          <article id="post-javaSocket" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/18/javaSocket/">javaSocket</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2023/03/18/javaSocket/" class="article-date">
+  <time datetime="2023-03-18T10:26:45.000Z" itemprop="datePublished">2023-03-18</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pansansui.github.io/2023/03/18/javaSocket/" data-id="clfe48ffw000iw090ga3p4zhd" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+            
           <article id="post-html-CSS" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -116,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/13/html-CSS/" data-id="clfchehya000bso908y135b2l" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/13/html-CSS/" data-id="clfe48ffs000cw0909ahoeyml" class="article-share-link">
         分享
       </a>
       
@@ -173,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/13/lanIP/" data-id="clfchehyb000cso90a176bvja" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/13/lanIP/" data-id="clfe48ffu000fw090a8ppdpt8" class="article-share-link">
         分享
       </a>
       
@@ -230,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/09/pansansuiBlog/" data-id="clfchehyc000eso907jemfjf3" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/09/pansansuiBlog/" data-id="clfe48ffv000hw090815bcvop" class="article-share-link">
         分享
       </a>
       
@@ -282,7 +434,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/09/mysql/" data-id="clfchehy9000aso908rfxff9k" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/09/mysql/" data-id="clfe48ffz000mw0906nvefnjc" class="article-share-link">
         分享
       </a>
       
@@ -340,7 +492,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/08/hexoOceanSkill/" data-id="clfchehyd000fso90hkxscpbo" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/08/hexoOceanSkill/" data-id="clfe48ffq000aw090eo4p0nod" class="article-share-link">
         分享
       </a>
       
@@ -398,7 +550,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-id="clfchehye000hso90c3us3tcw" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-id="clfe48ffy000kw090f83fdeo5" class="article-share-link">
         分享
       </a>
       
@@ -466,7 +618,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/07/gitssh/" data-id="clfchehy50005so90fivre85k" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/07/gitssh/" data-id="clfe48ffn0005w0905zhockf1" class="article-share-link">
         分享
       </a>
       
@@ -482,80 +634,14 @@
 
 </article>
             
-          <article id="post-hello-world" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/06/22/hello-world/">Hello pansansui</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/06/22/hello-world/" class="article-date">
-  <time datetime="2021-06-22T09:47:20.539Z" itemprop="datePublished">2021-06-22</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    
-    
-    <a class="article-gallery-img" href="/2021/06/22/hello-world/" rel="gallery_clfchehy70007so901yr2div3">
-      <img src="/images/hexo.svg" itemprop="image">
-    </a>
-    
-    
-  </div>
-</div>
-
-      
-      <p>Welcome ! This is my first blog for review my Java knowledge . Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a><br><br>
-      
-      <a class="article-more-link" href="/2021/06/22/hello-world/">
-        Read More...
-      </a>
-      
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2021/06/22/hello-world/" data-id="clfchehy70007so901yr2div3" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-            
   </article>
   
 
                       
+                        <nav class="page-nav">
+                          <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+                        </nav>
+                        
 </section>
 </div>
         <footer class="footer">

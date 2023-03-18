@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    lanIP |
+    IO流 |
     
     pansansui</title>
   
@@ -39,7 +39,7 @@
     </iframe>
     <main class="content">
       <section class="outer">
-  <article id="post-lanIP" class="article article-type-post" itemscope
+  <article id="post-IO流" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -48,7 +48,7 @@
       
 
 <h1 class="article-title" itemprop="name">
-  lanIP
+  IO流
 </h1>
 
 
@@ -58,8 +58,8 @@
 
     
     <div class="article-meta">
-      <a href="/2023/03/13/lanIP/" class="article-date">
-  <time datetime="2023-03-13T04:56:32.000Z" itemprop="datePublished">2023-03-13</time>
+      <a href="/2023/03/18/IO%E6%B5%81/" class="article-date">
+  <time datetime="2023-03-18T14:21:15.000Z" itemprop="datePublished">2023-03-18</time>
 </a>
       
     </div>
@@ -67,30 +67,21 @@
 
     
     
-<div class="tocbot"></div>
-
     
 
     <div class="article-entry" itemprop="articleBody">
       
       
       
-      <h1 id="路由寻址的摸索"><a href="#路由寻址的摸索" class="headerlink" title="路由寻址的摸索"></a>路由寻址的摸索</h1><p>个人理解，ip对应网卡，实际是多个虚拟网卡。mac对应主机，实际是对应端口号。<br>自己下午测了一下路由的各种情况，画了个表，大概知道路由器会有路由表，寻址时先广播找MAC。<br></p>
-<span id="more"></span>
-<img src=/images/post_lanip01.png width="100%" alt="测试图片" >
-4.在同一个wifi下（应该是同频率下），192.168.8.5（包装自己的Mac）在广播寻址192.168.8.2，在相同频段内连接的所有的网卡均能收到8.5寻找8.2信息，只要自身是8.2就可以回复并发送自己的Mac，不是8.2的不回复（存在多个冲突，推测先到先得），8.5在根据目标8.2的mac发送报文。（本次的路由器ip为192.169.0.1/24，与子网不同，推测路由器并不会在路由表中维护8.5的ipmac关系或者说路由器根本收不到广播？如果路由器ip192.168.8.1/24等包含8.5ip，则会维护）。
-
-
+      <p>个人思考：<br>目前我知道的是软件只能操作自己的内存空间不能操作其他的内存空间（因为不知道内存地址）?操作系统，和java程序这些都属于一个软件。那么io操作就应该是由硬件配套的程序管理的（驱动程序吗？）。当操作系统需要读取文件时，不应该是操作系统去写入而是操作系统向驱动程序发起读取请求，然后把自己的内存空间暴露给驱动系统，驱动系统再向其中写入文件?而java的老版本是：先驱动把文件写进操作系统的内存空间，操作系统再写入java暴露给操作系统的java内存空间，两次copy效率低，现在是建立映射，而操作系统暴露给驱动的内存空间实际上是java暴露给操作系统的内存空间吗？我的理解对吗，所以内存映射并不是java层实现的对吗，而是操作系统层实现的吗？而且如果是硬盘上的拷贝，各个软件传递的也是最终文件放置空间的地址值而非真正的拷贝? 求指导，我是一个非科班的初学者，希望得到的帮助 ，最好能详细讲解从硬件数据到java内存的过程包括各种协议的名称，作用，具体的实现细节可以不用告知，我想知道一个正确的框架?还有个问题，如果是我说的这样，为什么java不去直接找驱动，是不知道驱动的路径吗，只有安装了驱动的操作系统才有交互的可能？而安装的驱动实际上有点像嵌入式开发的软体？</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/13/lanIP/" data-id="clfe48ffu000fw090a8ppdpt8" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/18/IO%E6%B5%81/" data-id="clfe48ffr000bw09018jp1z8m" class="article-share-link">
         分享
       </a>
       
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ip/" rel="tag">ip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B1%80%E5%9F%9F%E7%BD%91/" rel="tag">局域网</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%AF%E7%94%B1%E8%A1%A8/" rel="tag">路由表</a></li></ul>
-
     </footer>
 
   </div>
@@ -99,19 +90,10 @@
   
 <nav class="article-nav">
   
-  <a href="/2023/03/13/html-CSS/" class="article-nav-link">
-    <strong class="article-nav-caption">前一篇</strong>
-    <div class="article-nav-title">
-      
-      html_CSS
-      
-    </div>
-  </a>
   
-  
-  <a href="/2023/03/09/pansansuiBlog/" class="article-nav-link">
+  <a href="/2023/03/18/maven/" class="article-nav-link">
     <strong class="article-nav-caption">后一篇</strong>
-    <div class="article-nav-title">pansansuiBlog</div>
+    <div class="article-nav-title">maven</div>
   </a>
   
 </nav>
