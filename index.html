@@ -75,6 +75,66 @@
       <h1 class="page-type-title"></h1>
       
         
+          <article id="post-java-IO源码思考" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/19/java-IO%E6%BA%90%E7%A0%81%E6%80%9D%E8%80%83/">java_IO源码思考</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2023/03/19/java-IO%E6%BA%90%E7%A0%81%E6%80%9D%E8%80%83/" class="article-date">
+  <time datetime="2023-03-19T05:40:27.000Z" itemprop="datePublished">2023-03-19</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <h2 id="file类实例化"><a href="#file类实例化" class="headerlink" title="file类实例化"></a>file类实例化</h2><p>文件名乱写，并不报错，说明这只是一个java抽象并没和操作系统交互,与文件没有实际联系，只有理论上路径联系。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File file = new File(<span class="string">&quot;./...asd.txt&quot;</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="FileInputStream类实例化"><a href="#FileInputStream类实例化" class="headerlink" title="FileInputStream类实例化"></a>FileInputStream类实例化</h2><p>有io异常，说明有交互，调取了操作系统的api。<br>java.io.FileNotFoundException: .\src (拒绝访问。)<br>    at java.base/java.io.FileInputStream.open0(Native Method)<br>    private native void open0(String name) throws FileNotFoundException;<br>    at java.base/java.io.FileInputStream.open(FileInputStream.java:219)<br>    at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)<br>    at java.base/java.io.FileInputStream.<init>(FileInputStream.java:112)<br>    at Solution.main(Solution.java:62)<br> java最底层的方法是private native void open0(String name) throws FileNotFoundException;<br> 可以看出给操作系统传了一个参数文件路径，无返回值，有异常。<br> 这证明所谓的流就是查看文件是否存在，存在就可以交互，不存在就抛出异常，然后在有java的一些抽象。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FileInputStream fileInputStream = new FileInputStream(<span class="string">&quot;./src/&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="FileInputStream-getChannel-源码"><a href="#FileInputStream-getChannel-源码" class="headerlink" title="FileInputStream.getChannel()源码"></a>FileInputStream.getChannel()源码</h2><p>对于一个inputstream流来说只有同一个channel，所以加锁，实现方法类似单例模式，具体由FileChannelImpl.open()实现</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public FileChannel <span class="function"><span class="title">getChannel</span></span>() &#123;</span><br><span class="line">        FileChannel <span class="built_in">fc</span> = this.channel;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">fc</span> == null) &#123;</span><br><span class="line">            synchronized (this) &#123;</span><br><span class="line">                <span class="built_in">fc</span> = this.channel;</span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">fc</span> == null) &#123;</span><br><span class="line">                    this.channel = <span class="built_in">fc</span> = FileChannelImpl.open(fd, path, <span class="literal">true</span>,</span><br><span class="line">                        <span class="literal">false</span>, <span class="literal">false</span>, this);</span><br><span class="line">                    <span class="keyword">if</span> (closed) &#123;</span><br><span class="line">                        try &#123;</span><br><span class="line">                            // possible race with close(), benign since</span><br><span class="line">                            // FileChannel.close is final and idempotent</span><br><span class="line">                            fc.close();</span><br><span class="line">                        &#125; catch (IOException ioe) &#123;</span><br><span class="line">                            throw new InternalError(ioe); // should not happen</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> <span class="built_in">fc</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="FileChannelImpl-open-源码"><a href="#FileChannelImpl-open-源码" class="headerlink" title="FileChannelImpl.open()源码"></a>FileChannelImpl.open()源码</h2><p>直接返回的是FileChannelImpl的实例，就是新造了一个FileChannelImpl下面是它的构造函数。<br>重点是 this.alignment = nd.setDirectIO(fd, path)，它的实现方法是native方法，给操作系统传入了两个参数FileDescriptor fd, CharBuffer buffer,返回值是int即下面的this.alignment。<br>其中buffer中存放着path去掉文件名后的char(ASCII码)。感觉作用就是一个约定</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">private FileChannelImpl(FileDescriptor fd, String path, boolean readable,</span><br><span class="line">                         boolean writable, boolean direct, Object parent)</span><br><span class="line"> &#123;</span><br><span class="line">     this.fd = fd;</span><br><span class="line">     this.readable = readable;</span><br><span class="line">     this.writable = writable;</span><br><span class="line">     this.parent = parent;</span><br><span class="line">     this.path = path;</span><br><span class="line">     this.direct = direct;</span><br><span class="line">     this.nd = new FileDispatcherImpl();</span><br><span class="line">     <span class="keyword">if</span> (direct) &#123;</span><br><span class="line">         assert path != null;</span><br><span class="line">         this.alignment = nd.setDirectIO(fd, path);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         this.alignment = -1;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="native本地方法"><a href="#native本地方法" class="headerlink" title="native本地方法"></a><a target="_blank" rel="noopener" href="https://ask.csdn.net/questions/7905174/54122660">native本地方法</a></h2><p>大佬的回答，暂时还不是很能理解，这里是已经在内存上创建了内存映射区了，还是说只是做好了约定。<br>传入的是文件描述符（也就相当于打开文件的句柄，以及缓冲区指针）<br>返回的是每扇区字节数（如果出错返回-1）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">JNIEXPORT jint JNICALL</span><br><span class="line">Java_sun_nio_ch_FileDispatcherImpl_setDirect0(JNIEnv *env, jclass this,</span><br><span class="line">                                              jobject fdObj, jobject buffer)</span><br><span class="line">&#123;</span><br><span class="line">    jint result = -1;</span><br><span class="line"> </span><br><span class="line">    HANDLE orig = (HANDLE)(handleval(env, fdObj));</span><br><span class="line"> </span><br><span class="line">    HANDLE modify = ReOpenFile(orig, 0, 0,</span><br><span class="line">            FILE_FLAG_NO_BUFFERING | FILE_FLAG_WRITE_THROUGH);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (modify != INVALID_HANDLE_VALUE) &#123;</span><br><span class="line">        DWORD sectorsPerCluster;</span><br><span class="line">        DWORD bytesPerSector;</span><br><span class="line">        DWORD numberOfFreeClusters;</span><br><span class="line">        DWORD totalNumberOfClusters;</span><br><span class="line">        LPCWSTR lpRootPathName = (*env)-&gt;GetDirectBufferAddress(env, buffer);</span><br><span class="line">        BOOL res = GetDiskFreeSpaceW(lpRootPathName,</span><br><span class="line">                                     &amp;sectorsPerCluster,</span><br><span class="line">                                     &amp;bytesPerSector,</span><br><span class="line">                                     &amp;numberOfFreeClusters,</span><br><span class="line">                                     &amp;totalNumberOfClusters);</span><br><span class="line">        <span class="keyword">if</span> (res == 0) &#123;</span><br><span class="line">            JNU_ThrowIOExceptionWithLastError(env, <span class="string">&quot;DirectIO setup failed&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        result = bytesPerSector;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pansansui.github.io/2023/03/19/java-IO%E6%BA%90%E7%A0%81%E6%80%9D%E8%80%83/" data-id="clffc5zwe000bwo90cqu94ozg" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+            
           <article id="post-IO流" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -112,7 +172,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/18/IO%E6%B5%81/" data-id="clfe48ffr000bw09018jp1z8m" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/18/IO%E6%B5%81/" data-id="clffc5zwa0005wo908ys18f8c" class="article-share-link">
         分享
       </a>
       
@@ -163,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/18/maven/" data-id="clfe48fft000ew090712hdxri" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/18/maven/" data-id="clffc5zwj000iwo90ahyq7u3e" class="article-share-link">
         分享
       </a>
       
@@ -213,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/18/javaSocket/" data-id="clfe48ffw000iw090ga3p4zhd" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/18/javaSocket/" data-id="clffc5zwh000fwo902t8ncgpc" class="article-share-link">
         分享
       </a>
       
@@ -268,7 +328,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/13/html-CSS/" data-id="clfe48ffs000cw0909ahoeyml" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/13/html-CSS/" data-id="clffc5zwf000cwo90abei5uop" class="article-share-link">
         分享
       </a>
       
@@ -325,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/13/lanIP/" data-id="clfe48ffu000fw090a8ppdpt8" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/13/lanIP/" data-id="clffc5zwi000gwo902iz3fq7d" class="article-share-link">
         分享
       </a>
       
@@ -382,7 +442,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/09/pansansuiBlog/" data-id="clfe48ffv000hw090815bcvop" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/09/pansansuiBlog/" data-id="clffc5zwl000lwo90gtos1l9k" class="article-share-link">
         分享
       </a>
       
@@ -434,7 +494,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/09/mysql/" data-id="clfe48ffz000mw0906nvefnjc" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/09/mysql/" data-id="clffc5zwk000jwo90hfux33zf" class="article-share-link">
         分享
       </a>
       
@@ -492,7 +552,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/08/hexoOceanSkill/" data-id="clfe48ffq000aw090eo4p0nod" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/08/hexoOceanSkill/" data-id="clffc5zwc0009wo90fowi82ge" class="article-share-link">
         分享
       </a>
       
@@ -550,79 +610,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-id="clfe48ffy000kw090f83fdeo5" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-id="clffc5zwm000nwo907skj8c1r" class="article-share-link">
         分享
       </a>
       
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-            
-          <article id="post-gitssh" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/03/07/gitssh/">git and ssh</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2023/03/07/gitssh/" class="article-date">
-  <time datetime="2023-03-07T10:23:41.000Z" itemprop="datePublished">2023-03-07</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <h1 id="配置用户名"><a href="#配置用户名" class="headerlink" title="配置用户名"></a>配置用户名</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;用户名&quot;</span> </span><br></pre></td></tr></table></figure>
-<h1 id="配置邮箱"><a href="#配置邮箱" class="headerlink" title="配置邮箱"></a>配置邮箱</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email` <span class="string">&quot;邮箱地址&quot;</span></span><br></pre></td></tr></table></figure>
-<h1 id="git生成公钥"><a href="#git生成公钥" class="headerlink" title="git生成公钥"></a>git生成公钥</h1><p>会生成在当前目录，git bash到用户的.ssh文件夹，可命名文件名，可设置打开文件的密码.默认电脑一个公钥私钥，一个公钥只能被使用一次，建议公钥绑定github账号而非github具体的仓库，部署多个<a target="_blank" rel="noopener" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys">点击这里</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&#x27;邮箱地址&#x27;</span></span><br></pre></td></tr></table></figure>
-<h1 id="查看git的用户名和邮箱"><a href="#查看git的用户名和邮箱" class="headerlink" title="查看git的用户名和邮箱"></a>查看git的用户名和邮箱</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global --list</span><br></pre></td></tr></table></figure>
-<h1 id="查看git的公钥"><a href="#查看git的公钥" class="headerlink" title="查看git的公钥"></a>查看git的公钥</h1><p>存储就在用户目录下的.ssh文件夹里</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="创建git仓库"><a href="#创建git仓库" class="headerlink" title="创建git仓库"></a>创建git仓库</h1><p>1.先在账户上创建repository。保证用户有权限，SSH或者http登录，推荐SSH绑定账户信息，http登录仓库，方便权限管理</p>
-<p>2.a 没有.git文件的，先在本地工程一级目录下初始化</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# HexoBogForPanpan&quot;</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin git@github.com:pansansui/HexoBogForPanpan.git //这是在你电脑上生成了一个origin的远程仓库，连接地址是后面的，常用命令有git remote //列出远程仓库名</span><br><span class="line">git remote show [远程仓库名] //该仓库链接的详细信息</span><br><span class="line">git remote rename old-name new-name //换名</span><br><span class="line">git push -u origin main //发布到远程仓库</span><br></pre></td></tr></table></figure>
-<p>2.b 有.git文件的:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:pansansui/HexoBogForPanpan.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
-
-<h1 id="git-常用命令集"><a href="#git-常用命令集" class="headerlink" title="git 常用命令集"></a>git 常用命令集</h1><p>git 常用操作练习<a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">点击这里</a>，该网站常用命令show solution，reset，levels<br>删除当前项目的git关联<br><code>find . -name &quot;.git&quot; | xargs rm -rf</code><br>初始化<br><code>git init</code><br>查看追踪文件状态<br><code>git status</code><br>取消文件追踪<br><code>git reset HEAD [文件路径]</code><br>添加文件追踪<br><code>git add [文件]</code><br>提交<br> <code>git commit -m [本次更新的消息提示]</code><br>创建切换分支<br><code>git branch bugFix;git checkout bugFix</code><br>或者<br><code>git checkout -b bugFix</code><br>合并当前分支与目标<br><code>git merge [目标分支]</code><br><img src=/images/merge.png width="30%" alt="未找到merge流程图片" ><br><code>git rebase [目标分支]</code></p>
-<p>对最近一次提交的信息修改<br><code>git commit --amend</code></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/07/gitssh/" data-id="clfe48ffn0005w0905zhockf1" class="article-share-link">
-        分享
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svn/" rel="tag">svn</a></li></ul>
 
     </footer>
 
