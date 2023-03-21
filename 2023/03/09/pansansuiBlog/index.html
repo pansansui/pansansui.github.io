@@ -88,7 +88,7 @@
 </blockquote>
 <p>themes—————————-主题</p>
 <blockquote>
-<p>landscape———–landscape据了解是设计hexo主题的一个框架没用ocean主题应该把landscape文件名改成ocean，再根据结构开发<br>ocean</p>
+<p>ocean</p>
 <blockquote>
 <p>languages<br>layout</p>
 <blockquote>
@@ -98,12 +98,16 @@
 </blockquote>
 <p>_config.landscape.yml<br>_config.yml hexo的配置文件</p>
 </blockquote>
-<h2 id="Done-and-todoList"><a href="#Done-and-todoList" class="headerlink" title="Done and todoList"></a>Done and todoList</h2><p><del>制作博客各种图标</del><br><del>引入网易云音乐</del><br><del>网易云音乐控件动画</del><br><del>网易云音乐控件动画抽搐bug</del><br><del>网易云音乐移动和pc端的适配</del><br>网易云音乐全站唯一对象（感觉不行，网址不能跳，只能把其他所有界面放到iframe里，iframe里没有服务器很难实现其他功能，把js弄到游览器上跑？）<br><del>引入b站视频</del><br><del>实现b站同款视频卡片页</del><br><del>解决b站防盗链（无语了开放api得到的数据加防盗链是咋想的）</del><br><del>修复b站卡片无法跳转的问题</del><br>判断游览器是否支持默认播放，否则关闭play()<br><del>实现read more</del><br><del>实现相册</del><br>实现下载功能<br><del>欠3道算法题</del><br><del>欠1道算法题</del><br>实现连接里面的分享卡片，写个hexo插件<br>实现图片的放大查看fancybox<br>完成博文lanIP<br>完成Hexo-SEO-AutoPush，方便搜索引擎爬取<br>实现夜间模式<br>html-CSS博文待完善</p>
+<p>工程的流程，hexo是帮助我们生成静态网站结构的脚手架。<br>我们编写的代码会被hexo g生成一定结构的静态网站，具体的结构为public文件下的结构。<br>所以js文件有两种：<br>a:一种是为hexo制订规则，各类hexo插件<br>b:一种是为网站写js代码，供游览器执行</p>
+<hr>
+<p>a的情况下：当为hexo制订规则时，文件应该是themes/ocean(你的主题)/scripts/文件夹下写js代码，没有就自建，hexo本身也声明了一些函数api供我们调用，具体可取官网查看。目前用到的有<br>hexo.extend.generator.register这是你写的文件到时候生成到pubic的什么路径，就是文件的映射。<br>hexo.extend.injector.register这是注入函数，即hexo会按照规则生成html页面，我们可以修改这个规则，如在body页面注入你想要的效果。<br>hexo.extend.tag.register这是注册一个用于markdown文件中的语法规则，hexo会按照你的规则解析markdowon文件。<br>b的情况下：为html写的js代码，供游览器执行,我的目录是在themes/ocean(你的主题)/source/js/<br>hexo编译静态文件的入口是themes/ocean(你的主题)/layout/layout.ejs</p>
+<hr>
+<h2 id="Done-and-todoList"><a href="#Done-and-todoList" class="headerlink" title="Done and todoList"></a>Done and todoList</h2><p><del>制作博客各种图标</del><br><del>引入网易云音乐</del><br><del>网易云音乐控件动画</del><br><del>网易云音乐控件动画抽搐bug</del><br><del>网易云音乐移动和pc端的适配</del><br>网易云音乐全站唯一对象（感觉不行，网址不能跳，只能把其他所有界面放到iframe里，iframe里没有服务器很难实现其他功能，把js弄到游览器上跑？）<br><del>引入b站视频</del><br><del>实现b站同款视频卡片页</del><br><del>解决b站防盗链（无语了开放api得到的数据加防盗链是咋想的）</del><br><del>修复b站卡片无法跳转的问题</del><br>判断游览器是否支持默认播放，否则关闭play()<br><del>实现read more</del><br><del>实现相册</del><br><del>实现下载功能</del><br><del>欠3道算法题</del><br><del>欠1道算法题</del><br>实现连接里面的分享卡片，写个hexo插件<br>实现图片的放大查看fancybox<br>完成博文lanIP<br>完成Hexo-SEO-AutoPush，方便搜索引擎爬取<br>实现夜间模式<br>html-CSS博文待完善</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pansansui.github.io/2023/03/09/pansansuiBlog/" data-id="clffc5zwl000lwo90gtos1l9k" class="article-share-link">
+      <a data-url="https://pansansui.github.io/2023/03/09/pansansuiBlog/" data-id="clficwhws000k5g904ymx78rg" class="article-share-link">
         分享
       </a>
       
