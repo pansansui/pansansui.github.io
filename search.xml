@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>IO流</title>
+    <url>/2023/03/18/IO%E6%B5%81/</url>
+    <content><![CDATA[<p>个人思考：<br>目前我知道的是软件只能操作自己的内存空间不能操作其他的内存空间（因为不知道内存地址）?操作系统，和java程序这些都属于一个软件。那么io操作就应该是由硬件配套的程序管理的（驱动程序吗？）。当操作系统需要读取文件时，不应该是操作系统去写入而是操作系统向驱动程序发起读取请求，然后把自己的内存空间暴露给驱动系统，驱动系统再向其中写入文件?而java的老版本是：先驱动把文件写进操作系统的内存空间，操作系统再写入java暴露给操作系统的java内存空间，两次copy效率低，现在是建立映射，而操作系统暴露给驱动的内存空间实际上是java暴露给操作系统的内存空间吗？我的理解对吗，所以内存映射并不是java层实现的对吗，而是操作系统层实现的吗？而且如果是硬盘上的拷贝，各个软件传递的也是最终文件放置空间的地址值而非真正的拷贝? 求指导，我是一个非科班的初学者，希望得到的帮助 ，最好能详细讲解从硬件数据到java内存的过程包括各种协议的名称，作用，具体的实现细节可以不用告知，我想知道一个正确的框架?还有个问题，如果是我说的这样，为什么java不去直接找驱动，是不知道驱动的路径吗，只有安装了驱动的操作系统才有交互的可能？而安装的驱动实际上有点像嵌入式开发的软体？</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>git and ssh</title>
+    <url>/2023/03/07/gitssh/</url>
+    <content><![CDATA[<h1 id="配置用户名"><a href="#配置用户名" class="headerlink" title="配置用户名"></a>配置用户名</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;用户名&quot;</span> </span><br></pre></td></tr></table></figure>
+<h1 id="配置邮箱"><a href="#配置邮箱" class="headerlink" title="配置邮箱"></a>配置邮箱</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.email` <span class="string">&quot;邮箱地址&quot;</span></span><br></pre></td></tr></table></figure>
+<h1 id="git生成公钥"><a href="#git生成公钥" class="headerlink" title="git生成公钥"></a>git生成公钥</h1><p>会生成在当前目录，git bash到用户的.ssh文件夹，可命名文件名，可设置打开文件的密码.默认电脑一个公钥私钥，一个公钥只能被使用一次，建议公钥绑定github账号而非github具体的仓库，部署多个<a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys">点击这里</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&#x27;邮箱地址&#x27;</span></span><br></pre></td></tr></table></figure>
+<h1 id="查看git的用户名和邮箱"><a href="#查看git的用户名和邮箱" class="headerlink" title="查看git的用户名和邮箱"></a>查看git的用户名和邮箱</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global --list</span><br></pre></td></tr></table></figure>
+<h1 id="查看git的公钥"><a href="#查看git的公钥" class="headerlink" title="查看git的公钥"></a>查看git的公钥</h1><p>存储就在用户目录下的.ssh文件夹里</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="创建git仓库"><a href="#创建git仓库" class="headerlink" title="创建git仓库"></a>创建git仓库</h1><p>1.先在账户上创建repository。保证用户有权限，SSH或者http登录，推荐SSH绑定账户信息，http登录仓库，方便权限管理</p>
+<p>2.a 没有.git文件的，先在本地工程一级目录下初始化</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# HexoBogForPanpan&quot;</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin git@github.com:pansansui/HexoBogForPanpan.git //这是在你电脑上生成了一个origin的远程仓库，连接地址是后面的，常用命令有git remote //列出远程仓库名</span><br><span class="line">git remote show [远程仓库名] //该仓库链接的详细信息</span><br><span class="line">git remote rename old-name new-name //换名</span><br><span class="line">git push -u origin main //发布到远程仓库</span><br></pre></td></tr></table></figure>
+<p>2.b 有.git文件的:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:pansansui/HexoBogForPanpan.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
+
+<h1 id="git-常用命令集"><a href="#git-常用命令集" class="headerlink" title="git 常用命令集"></a>git 常用命令集</h1><p>git 常用操作练习<a href="https://learngitbranching.js.org/?locale=zh_CN">点击这里</a>，该网站常用命令show solution，reset，levels<br>删除当前项目的git关联<br><code>find . -name &quot;.git&quot; | xargs rm -rf</code><br>初始化<br><code>git init</code><br>查看追踪文件状态<br><code>git status</code><br>取消文件追踪<br><code>git reset HEAD [文件路径]</code><br>添加文件追踪<br><code>git add [文件]</code><br>提交<br> <code>git commit -m [本次更新的消息提示]</code><br>创建切换分支<br><code>git branch bugFix;git checkout bugFix</code><br>或者<br><code>git checkout -b bugFix</code><br>合并当前分支与目标<br><code>git merge [目标分支]</code><br><img src=/images/merge.png width="30%" alt="未找到merge流程图片" ><br><code>git rebase [目标分支]</code></p>
+<p>对最近一次提交的信息修改<br><code>git commit --amend</code></p>
+]]></content>
+      <tags>
+        <tag>git</tag>
+        <tag>ssh</tag>
+        <tag>svn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello pansansui</title>
+    <url>/2021/06/22/hello-world/</url>
+    <content><![CDATA[<p>Welcome ! This is my first blog for review my Java knowledge . Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a><br><br><span id="more"></span></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>hexoOceanSkill</title>
+    <url>/2023/03/08/hexoOceanSkill/</url>
+    <content><![CDATA[<p>ocean 主题的feathericon的代号映射位置在themes\ocean\source\css_feathericon.styl下<br>ocean 主题的菜单更改图标的文件在themes\ocean\source\css_partial\navbar.styl中</p>
+<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题:"></a>遇到的问题:</h1><p>制作谷歌播放器动画的时候，声明在themes\ocean\source\css_partial\layout.styl 的属性绑定不了上iframe，最后在themes\ocean\source\js\ocean.js中用jQuery绑定的，原因初步<del>推测是要等iframe渲染好才可以绑定style属性。</del><br>—发现部署在github上的和自己hexo server运行的不一样，且导航栏的颜色属性也莫名奇妙的被覆盖了，现在怀疑是hexo g的时候哪里覆盖了layout.styl的属性或者根本没用上。<br>—真搞不懂了，在layout.styl删除了@media (min-width: 768px)下面的sidebar所有属性后，github上的导航栏恢复正常了，注释掉ocean.js的播放器动画，声明在layout.styl上也行了，问题是sidebar的颜色前后声明都是一样的为啥后面不行。<br></p>
+<span id="more"></span>
+<p>–受不了啦，明明写的right为-10rem喵的hexo g编译老是给爷改成10rem，最后2023手动改了public里的ocean.js和styl.styl，to do ：实现手机端的播放器透明，不透明转换，顶端粘粘。<br>–搞明白了，没有hexo clean之前残留的文件冲突了，无语了还以为会和git一样版本控制就没有每次clean，心塞。</p>
+]]></content>
+      <tags>
+        <tag>blog</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>html_CSS</title>
+    <url>/2023/03/13/html-CSS/</url>
+    <content><![CDATA[<p>div内文字：<br>a. 字母时，空格区别一个单词，换行时不会切割单词。<br>b. 汉字时，自动换行。<br>把div当作蒙板时，可以遮住iframe，遮不住select。可以使用iframe可以遮盖select，一般使用iframe和div结合的办法遮盖select（div所以要比iframe的z索引高）并创建内容，其实iframe会自动隐藏select，也可以自己只使用div和js隐藏select。如本博客主页所遇到的,下面的div用来在移动端时，遮住音乐播放器，和主页select视频，放弃hover事件模拟播放器iframe的点击事件。<br></p>
+<span id="more"></span>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;div class=<span class="string">&quot;musicMobileCover&quot;</span>&gt;</span><br><span class="line">      &lt;iframe hidden&gt;</span><br><span class="line">      &lt;/iframe&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>a标签herf失效时直接绑定点击事件<br>a标签的download只有只在该路径下的文件时才会自动下载</p>
+<p>有关位置定位的属性整理<br>position<br>margin<br>float<br>display<br>padding</p>
+]]></content>
+      <tags>
+        <tag>html</tag>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java_IO源码思考</title>
     <url>/2023/03/19/java-IO%E6%BA%90%E7%A0%81%E6%80%9D%E8%80%83/</url>
     <content><![CDATA[<h2 id="file类实例化"><a href="#file类实例化" class="headerlink" title="file类实例化"></a>file类实例化</h2><p>文件名乱写，并不报错，说明这只是一个java抽象并没和操作系统交互,与文件没有实际联系，只有理论上路径联系。</p>
@@ -16,9 +93,9 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">JNIEXPORT jint JNICALL</span><br><span class="line">Java_sun_nio_ch_FileDispatcherImpl_setDirect0(JNIEnv *env, jclass this,</span><br><span class="line">                                              jobject fdObj, jobject buffer)</span><br><span class="line">&#123;</span><br><span class="line">    jint result = -1;</span><br><span class="line"> </span><br><span class="line">    HANDLE orig = (HANDLE)(handleval(env, fdObj));</span><br><span class="line"> </span><br><span class="line">    HANDLE modify = ReOpenFile(orig, 0, 0,</span><br><span class="line">            FILE_FLAG_NO_BUFFERING | FILE_FLAG_WRITE_THROUGH);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (modify != INVALID_HANDLE_VALUE) &#123;</span><br><span class="line">        DWORD sectorsPerCluster;</span><br><span class="line">        DWORD bytesPerSector;</span><br><span class="line">        DWORD numberOfFreeClusters;</span><br><span class="line">        DWORD totalNumberOfClusters;</span><br><span class="line">        LPCWSTR lpRootPathName = (*env)-&gt;GetDirectBufferAddress(env, buffer);</span><br><span class="line">        BOOL res = GetDiskFreeSpaceW(lpRootPathName,</span><br><span class="line">                                     &amp;sectorsPerCluster,</span><br><span class="line">                                     &amp;bytesPerSector,</span><br><span class="line">                                     &amp;numberOfFreeClusters,</span><br><span class="line">                                     &amp;totalNumberOfClusters);</span><br><span class="line">        <span class="keyword">if</span> (res == 0) &#123;</span><br><span class="line">            JNU_ThrowIOExceptionWithLastError(env, <span class="string">&quot;DirectIO setup failed&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        result = bytesPerSector;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>IO流</title>
-    <url>/2023/03/18/IO%E6%B5%81/</url>
-    <content><![CDATA[<p>个人思考：<br>目前我知道的是软件只能操作自己的内存空间不能操作其他的内存空间（因为不知道内存地址）?操作系统，和java程序这些都属于一个软件。那么io操作就应该是由硬件配套的程序管理的（驱动程序吗？）。当操作系统需要读取文件时，不应该是操作系统去写入而是操作系统向驱动程序发起读取请求，然后把自己的内存空间暴露给驱动系统，驱动系统再向其中写入文件?而java的老版本是：先驱动把文件写进操作系统的内存空间，操作系统再写入java暴露给操作系统的java内存空间，两次copy效率低，现在是建立映射，而操作系统暴露给驱动的内存空间实际上是java暴露给操作系统的内存空间吗？我的理解对吗，所以内存映射并不是java层实现的对吗，而是操作系统层实现的吗？而且如果是硬盘上的拷贝，各个软件传递的也是最终文件放置空间的地址值而非真正的拷贝? 求指导，我是一个非科班的初学者，希望得到的帮助 ，最好能详细讲解从硬件数据到java内存的过程包括各种协议的名称，作用，具体的实现细节可以不用告知，我想知道一个正确的框架?还有个问题，如果是我说的这样，为什么java不去直接找驱动，是不知道驱动的路径吗，只有安装了驱动的操作系统才有交互的可能？而安装的驱动实际上有点像嵌入式开发的软体？</p>
+    <title>javaSocket</title>
+    <url>/2023/03/18/javaSocket/</url>
+    <content><![CDATA[<p>背景:<br>同一个手机，连接java监听的端口.<br>刚开始连接时,java生成一个socket，当socket没关闭时，这个手机再发送一个请求会被阻塞。</p>
 ]]></content>
   </entry>
   <entry>
@@ -26,26 +103,6 @@
     <url>/2023/03/18/maven/</url>
     <content><![CDATA[<p>sb-MAVEN<br>一点依赖传递都没解决，存粹的一个jar包管理工具，单纯只想引进个日志slf4j就搞我半天草</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.7.30&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.18.12&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt; &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt; &lt;artifactId&gt;logback-classic&lt;/artifactId&gt; &lt;version&gt;1.2.11&lt;/version&gt; &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>javaSocket</title>
-    <url>/2023/03/18/javaSocket/</url>
-    <content><![CDATA[<p>背景:<br>同一个手机，连接java监听的端口.<br>刚开始连接时,java生成一个socket，当socket没关闭时，这个手机再发送一个请求会被阻塞</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>html_CSS</title>
-    <url>/2023/03/13/html-CSS/</url>
-    <content><![CDATA[<p>div内文字：<br>a. 字母时，空格区别一个单词，换行时不会切割单词。<br>b. 汉字时，自动换行。<br>把div当作蒙板时，可以遮住iframe，遮不住select。可以使用iframe可以遮盖select，一般使用iframe和div结合的办法遮盖select（div所以要比iframe的z索引高）并创建内容，其实iframe会自动隐藏select，也可以自己只使用div和js隐藏select。如本博客主页所遇到的,下面的div用来在移动端时，遮住音乐播放器，和主页select视频，放弃hover事件模拟播放器iframe的点击事件。<br></p>
-<span id="more"></span>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;div class=<span class="string">&quot;musicMobileCover&quot;</span>&gt;</span><br><span class="line">      &lt;iframe hidden&gt;</span><br><span class="line">      &lt;/iframe&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<p>a标签herf失效时直接绑定点击事件<br>a标签的download只有只在该路径下的文件时才会自动下载</p>
-<p>有关位置定位的属性整理<br>position<br>margin<br>float<br>display<br>padding</p>
-]]></content>
-      <tags>
-        <tag>html</tag>
-        <tag>css</tag>
-      </tags>
   </entry>
   <entry>
     <title>lanIP</title>
@@ -113,17 +170,19 @@
       </tags>
   </entry>
   <entry>
-    <title>hexoOceanSkill</title>
-    <url>/2023/03/08/hexoOceanSkill/</url>
-    <content><![CDATA[<p>ocean 主题的feathericon的代号映射位置在themes\ocean\source\css_feathericon.styl下<br>ocean 主题的菜单更改图标的文件在themes\ocean\source\css_partial\navbar.styl中</p>
-<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题:"></a>遇到的问题:</h1><p>制作谷歌播放器动画的时候，声明在themes\ocean\source\css_partial\layout.styl 的属性绑定不了上iframe，最后在themes\ocean\source\js\ocean.js中用jQuery绑定的，原因初步<del>推测是要等iframe渲染好才可以绑定style属性。</del><br>—发现部署在github上的和自己hexo server运行的不一样，且导航栏的颜色属性也莫名奇妙的被覆盖了，现在怀疑是hexo g的时候哪里覆盖了layout.styl的属性或者根本没用上。<br>—真搞不懂了，在layout.styl删除了@media (min-width: 768px)下面的sidebar所有属性后，github上的导航栏恢复正常了，注释掉ocean.js的播放器动画，声明在layout.styl上也行了，问题是sidebar的颜色前后声明都是一样的为啥后面不行。<br></p>
-<span id="more"></span>
-<p>–受不了啦，明明写的right为-10rem喵的hexo g编译老是给爷改成10rem，最后2023手动改了public里的ocean.js和styl.styl，to do ：实现手机端的播放器透明，不透明转换，顶端粘粘。<br>–搞明白了，没有hexo clean之前残留的文件冲突了，无语了还以为会和git一样版本控制就没有每次clean，心塞。</p>
-]]></content>
-      <tags>
-        <tag>blog</tag>
-        <tag>hexo</tag>
-      </tags>
+    <title>单片机51</title>
+    <url>/2023/03/23/%E5%8D%95%E7%89%87%E6%9C%BA51/</url>
+    <content><![CDATA[<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>硬件: 单片机：STC89C52RC,<br>软件: 开发环境-keil-5,烧录软体-stc-isp,驱动</p>
+<hr>
+<h2 id="术语，电路相关，c语言相关库"><a href="#术语，电路相关，c语言相关库" class="headerlink" title="术语，电路相关，c语言相关库"></a>术语，电路相关，c语言相关库</h2><p>寄存器；就是0/1，一般8个bit为一个寄存器。高电平（1），低电平（0）。<br>vcc：正极输入，也就是高电平。<br>晶振：计时要根据cpu的晶振计算，可在烧录软件生成相应的函数，要指定频率，时长，还有板子的指令集适用<br>nop函数：#include &lt;INTRINS.H&gt; 插入头文件nop，汇编指令集的空操作，用于延时功能<br>单边机: 根据硬件制造商的约定，库定义各个引脚的名称，根据这些名称实现高低电平的转换。</p>
+<h2 id="相关图片"><a href="#相关图片" class="headerlink" title="相关图片"></a>相关图片</h2><h5 id="在开发环境中选中你的cpu型号"><a href="#在开发环境中选中你的cpu型号" class="headerlink" title="在开发环境中选中你的cpu型号"></a>在开发环境中选中你的cpu型号</h5><img src=/images/51singlechip01.png width="100%" alt="测试图片"/>
+
+<h5 id="引入cpu定义的库"><a href="#引入cpu定义的库" class="headerlink" title="引入cpu定义的库"></a>引入cpu定义的库</h5><img src=/images/51singlechip03.png width="100%" alt="测试图片" >
+<img src=/images/51singlechip02.png width="100%" alt="测试图片" >
+
+
+<h5 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h5><p>在烧录页面可获取时间函数，会根据晶振来计算，若自己实现参数传递，感觉不了解相关算法单纯循环1s会多几次晶振导致不准确，循环次数越多越不准，单次时间越长越准，可以考虑什么时候可以忽略。<br><img src=/images/51singlechip.png width="100%" alt="测试图片" ></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 51单片机,流水灯</span><br><span class="line"><span class="comment">#include &lt;REGX52.H&gt;</span></span><br><span class="line"><span class="comment">#include &lt;INTRINS.H&gt;</span></span><br><span class="line">void Delay500ms()		//@11.0592MHz</span><br><span class="line">&#123;</span><br><span class="line">	unsigned char i, j, k;</span><br><span class="line"></span><br><span class="line">	_nop_();</span><br><span class="line">	i = 4;</span><br><span class="line">	j = 129;</span><br><span class="line">	k = 119;</span><br><span class="line">	<span class="keyword">do</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">do</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">while</span> (--k);</span><br><span class="line">		&#125; <span class="keyword">while</span> (--j);</span><br><span class="line">	&#125; <span class="keyword">while</span> (--i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="title">main</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">	int n=1;</span><br><span class="line">	<span class="keyword">while</span>(1)&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==8)&#123;</span><br><span class="line">		n=0;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		P2=~(1&lt;&lt;<span class="string">n);</span></span><br><span class="line"><span class="string">		n</span>++;</span><br><span class="line">		Delay500ms();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>数据结构与算法</title>
@@ -158,49 +217,5 @@
         <tag>数据结构</tag>
         <tag>java</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>git and ssh</title>
-    <url>/2023/03/07/gitssh/</url>
-    <content><![CDATA[<h1 id="配置用户名"><a href="#配置用户名" class="headerlink" title="配置用户名"></a>配置用户名</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;用户名&quot;</span> </span><br></pre></td></tr></table></figure>
-<h1 id="配置邮箱"><a href="#配置邮箱" class="headerlink" title="配置邮箱"></a>配置邮箱</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.email` <span class="string">&quot;邮箱地址&quot;</span></span><br></pre></td></tr></table></figure>
-<h1 id="git生成公钥"><a href="#git生成公钥" class="headerlink" title="git生成公钥"></a>git生成公钥</h1><p>会生成在当前目录，git bash到用户的.ssh文件夹，可命名文件名，可设置打开文件的密码.默认电脑一个公钥私钥，一个公钥只能被使用一次，建议公钥绑定github账号而非github具体的仓库，部署多个<a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys">点击这里</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&#x27;邮箱地址&#x27;</span></span><br></pre></td></tr></table></figure>
-<h1 id="查看git的用户名和邮箱"><a href="#查看git的用户名和邮箱" class="headerlink" title="查看git的用户名和邮箱"></a>查看git的用户名和邮箱</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global --list</span><br></pre></td></tr></table></figure>
-<h1 id="查看git的公钥"><a href="#查看git的公钥" class="headerlink" title="查看git的公钥"></a>查看git的公钥</h1><p>存储就在用户目录下的.ssh文件夹里</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="创建git仓库"><a href="#创建git仓库" class="headerlink" title="创建git仓库"></a>创建git仓库</h1><p>1.先在账户上创建repository。保证用户有权限，SSH或者http登录，推荐SSH绑定账户信息，http登录仓库，方便权限管理</p>
-<p>2.a 没有.git文件的，先在本地工程一级目录下初始化</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# HexoBogForPanpan&quot;</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin git@github.com:pansansui/HexoBogForPanpan.git //这是在你电脑上生成了一个origin的远程仓库，连接地址是后面的，常用命令有git remote //列出远程仓库名</span><br><span class="line">git remote show [远程仓库名] //该仓库链接的详细信息</span><br><span class="line">git remote rename old-name new-name //换名</span><br><span class="line">git push -u origin main //发布到远程仓库</span><br></pre></td></tr></table></figure>
-<p>2.b 有.git文件的:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:pansansui/HexoBogForPanpan.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
-
-<h1 id="git-常用命令集"><a href="#git-常用命令集" class="headerlink" title="git 常用命令集"></a>git 常用命令集</h1><p>git 常用操作练习<a href="https://learngitbranching.js.org/?locale=zh_CN">点击这里</a>，该网站常用命令show solution，reset，levels<br>删除当前项目的git关联<br><code>find . -name &quot;.git&quot; | xargs rm -rf</code><br>初始化<br><code>git init</code><br>查看追踪文件状态<br><code>git status</code><br>取消文件追踪<br><code>git reset HEAD [文件路径]</code><br>添加文件追踪<br><code>git add [文件]</code><br>提交<br> <code>git commit -m [本次更新的消息提示]</code><br>创建切换分支<br><code>git branch bugFix;git checkout bugFix</code><br>或者<br><code>git checkout -b bugFix</code><br>合并当前分支与目标<br><code>git merge [目标分支]</code><br><img src=/images/merge.png width="30%" alt="未找到merge流程图片" ><br><code>git rebase [目标分支]</code></p>
-<p>对最近一次提交的信息修改<br><code>git commit --amend</code></p>
-]]></content>
-      <tags>
-        <tag>git</tag>
-        <tag>ssh</tag>
-        <tag>svn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello pansansui</title>
-    <url>/2021/06/22/hello-world/</url>
-    <content><![CDATA[<p>Welcome ! This is my first blog for review my Java knowledge . Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a><br><br><span id="more"></span></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
 </search>

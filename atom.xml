@@ -6,7 +6,7 @@
   <link href="https://pansansui.github.io/atom.xml" rel="self"/>
   
   <link href="https://pansansui.github.io/"/>
-  <updated>2023-03-19T11:49:55.735Z</updated>
+  <updated>2023-03-23T11:55:05.922Z</updated>
   <id>https://pansansui.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>单片机51</title>
+    <link href="https://pansansui.github.io/2023/03/23/%E5%8D%95%E7%89%87%E6%9C%BA51/"/>
+    <id>https://pansansui.github.io/2023/03/23/%E5%8D%95%E7%89%87%E6%9C%BA51/</id>
+    <published>2023-03-23T09:57:17.000Z</published>
+    <updated>2023-03-23T11:55:05.922Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;工具&quot;&gt;&lt;a href=&quot;#工具&quot; class=&quot;headerlink&quot; title=&quot;工具&quot;&gt;&lt;/a&gt;工具&lt;/h2&gt;&lt;p&gt;硬件: 单片机：STC89C52RC,&lt;br&gt;软件: 开发环境-keil-5,烧录软体-stc-isp,驱动&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>java_IO源码思考</title>
@@ -85,14 +108,14 @@
     <link href="https://pansansui.github.io/2023/03/18/javaSocket/"/>
     <id>https://pansansui.github.io/2023/03/18/javaSocket/</id>
     <published>2023-03-18T10:26:45.000Z</published>
-    <updated>2023-03-20T05:45:17.098Z</updated>
+    <updated>2023-03-23T11:39:34.896Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;背景:&lt;br&gt;同一个手机，连接java监听的端口.&lt;br&gt;刚开始连接时,java生成一个socket，当socket没关闭时，这个手机再发送一个请求会被阻塞&lt;/p&gt;
+    <summary type="html">&lt;p&gt;背景:&lt;br&gt;同一个手机，连接java监听的端口.&lt;br&gt;刚开始连接时,java生成一个socket，当socket没关闭时，这个手机再发送一个请求会被阻塞。&lt;/p&gt;
 </summary>
         
       
